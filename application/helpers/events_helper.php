@@ -12,7 +12,7 @@ if (! function_exists('eventsRegister')) {
      */
     function eventsRegister($event, $class_method)
     {
-        return get_instance()->sc_events->register($event, $class_method);
+        return get_instance()->my_events->register($event, $class_method);
     }
 }
 
@@ -26,6 +26,6 @@ if (! function_exists('eventsTrigger')) {
      */
     function eventsTrigger($event, $args = [])
     {
-        return get_instance()->sc_events->trigger($event, $args);
+        return get_instance()->my_events->trigger($event, $args);
     }
 }

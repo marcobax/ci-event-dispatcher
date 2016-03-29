@@ -6,7 +6,7 @@ Step 1. Copy the files to their respective folders.
 
 Step 2. Update `application\config\autoload.php` as follows:
 
-    $autoload['libraries'] = array('events');
+    $autoload['libraries'] = array('my_events');
 
     $autoload['helper'] = array('events');
 
