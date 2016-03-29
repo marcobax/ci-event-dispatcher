@@ -23,7 +23,7 @@ Example to trigger an event:
 
     eventsTrigger('my_awesome_event', ['argument_1' => 'value_of_argument']);
 
-If you have any question, feel free to follow me on Twitter: @josepostiga
+If you have any questions, feel free to follow me on Twitter: @josepostiga
 
 ## License
 Released under the MIT license.
