@@ -19,6 +19,10 @@ After successfully follow the steps above, you're able to use the Event dispatch
 
 The `application\config\events.php` file allows you to globally define a listener for your project (for a log system, for example). See file's DocBlocks for specific examples.
 
+Example to trigger an event:
+
+    eventsTrigger('my_awesome_event', ['argument_1' => 'value_of_argument']);
+
 If you have any question, feel free to follow me on Twitter: @josepostiga
 
 ## License
