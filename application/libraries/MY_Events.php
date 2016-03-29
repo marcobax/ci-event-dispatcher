@@ -98,7 +98,7 @@ class MY_Events
         // checks if class is already loaded
         if (! $this->CI->load->is_loaded($class)) {
             // checks for a model
-            if (file_exists(APPPATH."models/{}$class}_model.php")) {
+            if (file_exists(APPPATH."models/{$class}_model.php")) {
                 $this->CI->load->model("{$class}_model", $class, true);
             }
 
