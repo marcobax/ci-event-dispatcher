@@ -59,8 +59,18 @@ class MY_Events
      */
     public function trigger($event, $args = [])
     {
-        // checks if event exists
-        if (! isset($this->listeners[$event])) {
+        // checks event to trigger
+        if (strpos($event, '@') !== false) {
+            // creates event name from class/method combo
+            $event_name = strtolower(str_replace('@', '_', $event));
+
+            // registers event and triggers on the fly
+            if ($this->register($event_name, $event)) {
+                return $this->trigger($event_name, $args);
+            }
+
+            return null;
+        } elseif (! isset($this->listeners[$event])) {
             return null;
         }
 
