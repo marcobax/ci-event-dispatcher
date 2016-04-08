@@ -105,20 +105,29 @@ class MY_Events
      */
     protected final function propagate($class, $method = 'index', $args = [])
     {
-        // checks if class is already loaded
-        if (! $this->CI->load->is_loaded($class)) {
-            // checks for a model
-            if (file_exists(APPPATH."models/{$class}_model.php")) {
-                $this->CI->load->model("{$class}_model", $class, true);
-            }
+        // normalizes class name
+        $model_class = ucfirst(strtolower($class));
+        $lib_class = strtolower($class);
 
-            // checks for a library
-            if (file_exists(APPPATH."libraries/{$class}.php")) {
-                $this->CI->load->library($class);
+        // checks if class is already loaded
+        if (! isset($this->CI->$model_class) && ! isset($this->CI->$lib_class)) {
+            // tries to load a model
+            try {
+                $this->CI->load->model("{$model_class}_model", $model_class, true);
+            } catch (Exception $e) {}
+
+            // tries to load a library
+            try {
+                $this->CI->load->library($lib_class);
+            } catch (Exception $e) {}
+
+            // now is the class loaded? Last call!
+            if (! isset($this->CI->$model_class) && ! isset($this->CI->$lib_class)) {
+                return false;
             }
         }
 
         // executes class method
-        return $this->CI->{$class}->{$method}($args);
+        return isset($this->CI->$model_class) ? $this->CI->$model_class->$method($args) : $this->CI->$lib_class->$method($args);
     }
 }
